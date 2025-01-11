@@ -1,6 +1,7 @@
+import random
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
 
 
 class TestElements:
@@ -51,6 +52,31 @@ class TestElements:
            assert output_yes == "Yes", "Yes, wasn't selected"
            assert output_impressive == "Impressive, Impressive, wasn't selected"
            assert output_no == "No, No, wasn't selected"
+
+    class TestWebTable:
+
+        def test_webtable_add_person(self,driver):
+            webtable_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            webtable_page.open()
+            new_person = webtable_page.add_new_person()
+            time.sleep(3)
+            table_result = webtable_page.check_new_added_person()
+            print(new_person)
+            print(table_result)
+            assert new_person in table_result
+
+        def test_webtable_search_person(self, driver):
+            webtable_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            webtable_page.open()
+            first_name = webtable_page.add_new_person()[0]
+            webtable_page.search_person_by_name(first_name)
+            table_result = webtable_page.check_searched_person()
+            print("Key Word: " + first_name)
+            print("Table Results: " + table_result)
+            assert first_name in table_result
+
+
+
 
 
 
