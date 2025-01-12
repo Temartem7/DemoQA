@@ -140,3 +140,25 @@ class WebTablePage(BasePage):
         row = delete_btn.find_element(By.XPATH, self.locators.ROW_PARENT)
         return " ".join(row.text.splitlines())
         #return row.text.splitlines()
+
+    def update_person_info(self):
+        person_info = next(generated_person())
+        age = person_info.age
+        self.element_is_visible(self.locators.EDIT_BTN).click()
+        self.element_is_visible(self.locators.AGE_INPUT).send_keys(age)
+        self.element_is_visible(self.locators.SUBMIT_BTN).click()
+        return str(age)
+
+    def select_amount_of_rows_visible(self):
+        count = [5,10,20,25,50,100]
+        data = []
+        for item in count:
+            amount_of_rows_displayed = self.scroll_to(self.element_is_visible(self.locators.TOTAL_ROWS_DISPLAYED))
+            amount_of_rows_displayed.click()
+            self.element_is_visible((By.CSS_SELECTOR, f"option[value='{item}']")).click()
+            data.append(self.check_amount_of_rows())
+
+    def check_amount_of_rows(self):
+        list_of_rows = self.elements_are_present(self.locators.FULL_CLIENT_LIST)
+        return len(list_of_rows)
+

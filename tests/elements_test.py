@@ -75,6 +75,23 @@ class TestElements:
             print("Table Results: " + table_result)
             assert first_name in table_result
 
+        def test_webtable_update_person_info(self, driver):
+            webtable_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            webtable_page.open()
+            last_name = webtable_page.add_new_person()[1]
+            webtable_page.search_person_by_name(last_name)
+            age = webtable_page.update_person_info()
+            row = webtable_page.check_searched_person()
+            print(age)
+            print(row)
+            assert age in row
+
+        def test_change_row_count(self,driver):
+            webtable_page = WebTablePage(driver, "https://demoqa.com/webtables")
+            webtable_page.open()
+            count = webtable_page.select_amount_of_rows_visible()
+            assert count == [5, 10, 20, 25, 50, 100]
+
 
 
 

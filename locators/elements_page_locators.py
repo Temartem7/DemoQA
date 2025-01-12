@@ -46,3 +46,9 @@ class WebTablePageLocators:
     DELETE_BTN = (By.CSS_SELECTOR, "span[title='Delete']")
     ROW_PARENT = ".//ancestor::div[@class='rt-tr-group']"
 
+    #update
+    EDIT_BTN = (By.CSS_SELECTOR, "span[title='Edit']")
+    TOTAL_ROWS_DISPLAYED = (By.CSS_SELECTOR, "select[aria-label='rows per page']")
+
+
+
