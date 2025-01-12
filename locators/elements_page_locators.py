@@ -50,5 +50,16 @@ class WebTablePageLocators:
     EDIT_BTN = (By.CSS_SELECTOR, "span[title='Edit']")
     TOTAL_ROWS_DISPLAYED = (By.CSS_SELECTOR, "select[aria-label='rows per page']")
 
+class ButtonsPageLocators:
+
+    DOUBLE_CLICK_BTN = (By.CSS_SELECTOR, "button[id='doubleClickBtn']")
+    RIGHT_CLICK_BTN = (By.CSS_SELECTOR, "button[id='rightClickBtn']")
+    DYNAMIC_CLICK_BTN = (By.XPATH, "//button[text()='Click Me']")
+
+    #results
+    DOUBLE_CLICK_MSG = (By.CSS_SELECTOR, "p[id='doubleClickMessage']")
+    RIGHT_CLICK_MSG = (By.CSS_SELECTOR, "p[id='rightClickMessage']")
+    DYNAMIC_CLICK_MSG = (By.CSS_SELECTOR, "p[id='dynamicClickMessage']")
+
 
 

@@ -21,6 +21,7 @@ class BasePage:
 
             if headless:
                 chrome_options.add_argument("--headless")
+                chrome_options.add_argument("--disable-blink-features=AutomationControlled")
                 chrome_options.add_argument("--disable-gpu")
                 chrome_options.add_argument("--no-sandbox")
 
@@ -78,7 +79,7 @@ class BasePage:
                                    element)
         return element if return_element else None
 
-    def scroll_with_action(self, element_or_locator, timeout=5):
+    def actions_scroll(self, element_or_locator, timeout=5):
         """
         Scrolls to an element using ActionChains.
         :param element_or_locator: Can be either a locator (tuple) or a WebElement.
@@ -92,4 +93,34 @@ class BasePage:
 
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
+        return element  # Returning the element allows method chaining
+
+    def actions_double_click(self, element_or_locator, timeout=10):
+        if isinstance(element_or_locator, tuple):  # If it's a locator, find the element first
+            element = wait(self.driver, timeout).until(EC.visibility_of_element_located(element_or_locator))
+        else:  # If it's already a WebElement, use it directly
+            element = element_or_locator
+
+        actions = ActionChains(self.driver)
+        actions.double_click(element).perform()
+        return element  # Returning the element allows method chaining
+
+    def actions_right_click(self, element_or_locator, timeout=10):
+        if isinstance(element_or_locator, tuple):  # If it's a locator, find the element first
+            element = wait(self.driver, timeout).until(EC.visibility_of_element_located(element_or_locator))
+        else:  # If it's already a WebElement, use it directly
+            element = element_or_locator
+
+        actions = ActionChains(self.driver)
+        actions.context_click(element).perform()
+        return element  # Returning the element allows method chaining
+
+    def actions_dynamic_click(self, element_or_locator, timeout=10):
+        if isinstance(element_or_locator, tuple):  # If it's a locator, find the element first
+            element = wait(self.driver, timeout).until(EC.visibility_of_element_located(element_or_locator))
+        else:  # If it's already a WebElement, use it directly
+            element = element_or_locator
+
+        actions = ActionChains(self.driver)
+        actions.click(element).perform()
         return element  # Returning the element allows method chaining

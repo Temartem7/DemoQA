@@ -1,7 +1,7 @@
 import random
 import time
 
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
 
 
 class TestElements:
@@ -92,6 +92,41 @@ class TestElements:
             count = webtable_page.select_amount_of_rows_visible()
             assert count == [5, 10, 20, 25, 50, 100]
 
+    class TestButtonsPage:
+
+        def test_all_buttons(self, driver):
+            webtable_page = ButtonsPage(driver, "https://demoqa.com/buttons")
+            webtable_page.open()
+            double_click = webtable_page.click_different_buttons("double_click")
+            right_click = webtable_page.click_different_buttons("right_click")
+            dynamic_click = webtable_page.click_different_buttons("dynamic_click")
+            print(double_click)
+            print(right_click)
+            print(dynamic_click)
+            assert double_click == "You have done a double click"
+            assert right_click == "You have done a right click"
+            assert dynamic_click == "You have done a dynamic click"
+
+        def test_double_click(self, driver):
+            webtable_page = ButtonsPage(driver, "https://demoqa.com/buttons")
+            webtable_page.open()
+            double_click = webtable_page.click_different_buttons("double_click")
+            print(double_click)
+            assert double_click == "You have done a double click"
+
+        def test_right_click(self, driver):
+            webtable_page = ButtonsPage(driver, "https://demoqa.com/buttons")
+            webtable_page.open()
+            right_click = webtable_page.click_different_buttons("right_click")
+            print(right_click)
+            assert right_click == "You have done a right click"
+
+        def test_dynamic_click(self, driver):
+            webtable_page = ButtonsPage(driver, "https://demoqa.com/buttons")
+            webtable_page.open()
+            dynamic_click = webtable_page.click_different_buttons("dynamic_click")
+            print(dynamic_click)
+            assert dynamic_click == "You have done a dynamic click"
 
 
 
